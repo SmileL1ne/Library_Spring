@@ -17,10 +17,6 @@ public class Person {
 
     private int personId;
 
-    @NotEmpty(message = "Write your age, please!")
-    @Min(value = 0, message = "Age should be positive!")
-    private int age;
-
     @NotEmpty(message = "Write your name, please!")
     @Size(min = 2, max = 30, message = "Name length should be between 2 and 30 characters!")
     private String name;
@@ -31,6 +27,6 @@ public class Person {
 
     @NotEmpty(message = "Write your date of birth in YYYY-MM-DD format, please!")
     @Size(min = 10, max = 10, message = "Write your date of birth in YYYY-MM-DD format, please!")
-    private String date_of_birth;
+    private String dateOfBirth;
 
 }
