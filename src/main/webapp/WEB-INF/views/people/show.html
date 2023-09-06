@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+
+<p th:text="${'Name and surname: ' + person.getName() + ' ' + person.getSurname()}">VALUE</p>
+<p th:text="${'Date of birth: ' + person.getDateOfBirth()}">VALUE</p>
+<p th:text="${'Id: ' + person.getPersonId()}">VALUE</p>
+
+<a th:href="@{/people/{id}/edit(id=${person.getPersonId()})}">Edit data</a>
+<br/> <!-- this br tag doesn't work and I dunno why -->
+<form th:method="DELETE" th:action="@{/people/{id}/delete(id=${person.getPersonId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+</body>
+</html>
