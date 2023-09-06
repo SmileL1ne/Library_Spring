@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class PersonDAO {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public PersonDAO(JdbcTemplate jdbcTemplate) {
@@ -20,6 +20,11 @@ public class PersonDAO {
 
     public List<Person> index() {
         return jdbcTemplate.query("SELECT * FROM Person", new BeanPropertyRowMapper<>(Person.class));
+    }
+
+    public void save(Person person) {
+        jdbcTemplate.update("INSERT INTO Person(name, surname, dateOfBirth, pName) VALUES (?, ?, ?, ?)",
+                person.getName(), person.getSurname(), person.getDateOfBirth(), person.getPName());
     }
 
     public Person show(int id) {
