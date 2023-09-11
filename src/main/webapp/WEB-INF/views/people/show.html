@@ -13,7 +13,7 @@
 <a th:href="@{/people/{id}/edit(id=${person.getPersonId()})}">Edit data</a>
 <br/> <!-- this br tag doesn't work and I dunno why -->
 <form th:method="DELETE" th:action="@{/people/{id}/delete(id=${person.getPersonId()})}">
-    <input type="submit" value="Delete"/>
+    <input type="submit" value="Delete person"/>
 </form>
 
 </body>
