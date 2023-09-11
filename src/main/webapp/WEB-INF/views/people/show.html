@@ -10,8 +10,12 @@
 <p th:text="${'Date of birth: ' + person.getDateOfBirth()}">VALUE</p>
 <p th:text="${'Id: ' + person.getPersonId()}">VALUE</p>
 
-<a th:href="@{/people/{id}/edit(id=${person.getPersonId()})}">Edit data</a>
-<br/> <!-- this br tag doesn't work and I dunno why -->
+<!--<p th:if=""-->
+
+<hr>
+<form th:href="@{/people/{id}/edit(id=${person.getPersonId()})}">
+    <input type="submit" value="Edit person">
+</form>
 <form th:method="DELETE" th:action="@{/people/{id}/delete(id=${person.getPersonId()})}">
     <input type="submit" value="Delete person"/>
 </form>
