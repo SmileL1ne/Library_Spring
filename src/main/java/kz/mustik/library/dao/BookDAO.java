@@ -1,11 +1,13 @@
 package kz.mustik.library.dao;
 
 import kz.mustik.library.models.Book;
+import kz.mustik.library.models.Person;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BookDAO {
@@ -37,5 +39,18 @@ public class BookDAO {
 
     public void delete(int bookId) {
         jdbcTemplate.update("DELETE FROM Book WHERE bookId=?", bookId);
+    }
+
+    public Optional<Person> getBookOwnerById(int bookId) {
+        return jdbcTemplate.query("SELECT Person.* FROM Person JOIN Book ON Book.personId = Person.personId " +
+                "WHERE bookId=?", new Object[]{bookId}, new BeanPropertyRowMapper<>(Person.class))
+                .stream().findAny();
+    }
+    public void book(Person onlyIdPerson, int bookId) {
+        jdbcTemplate.update("UPDATE Book SET personId=? WHERE bookId=?", onlyIdPerson.getPersonId(), bookId);
+    }
+
+    public void releaseBook(int personId) {
+        jdbcTemplate.update("UPDATE Book SET personId=NULL WHERE personId=?", personId);
     }
 }

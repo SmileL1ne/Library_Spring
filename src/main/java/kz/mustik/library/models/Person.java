@@ -32,4 +32,8 @@ public class Person {
     @Size(min = 10, max = 10, message = "Write your date of birth in YYYY-MM-DD format, please!")
     private String dateOfBirth;
 
+    public String getFullName() {
+        return surname + " " + name + " " + pName;
+    }
+
 }

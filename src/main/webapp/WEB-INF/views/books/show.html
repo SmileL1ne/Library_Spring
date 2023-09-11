@@ -10,12 +10,34 @@
 <p th:text="${'Author: ' + book.getAuthor()}">VALUE</p>
 <p th:text="${'Year: ' + book.getYear()}">VALUE</p>
 
+<hr/>
 
+<div th:if="${people}">
+    <p>It is available for booking. Whom do you want to book it?</p>
+    <form th:method="PATCH" th:action="@{/books/{id}/reserve(id=${book.getBookId()})}">
+        <label for="person">Choose a person: </label>
+        <select th:object="${person}" th:field="*{personId}" id="person">
+            <option th:each="person : ${people}" th:value="${person.getPersonId()}" th:text="${person.getFullName()}">
+            </option>
+        </select>
+        <input type="submit" value="Book it!"/>
+    </form>
+</div>
 
-<form th:href="@{/books/{id}/edit(id=${book.getBookId()})}">
+<div th:if="${owner}">
+    <p th:text="${'The book is borrowed by: ' + owner.getFullName()}"></p>
+    <br/>
+    <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getBookId()})}">
+        <input type="submit" value="Release">
+    </form>
+</div>
+
+<hr/>
+
+<form th:method="GET" th:action="@{/books/{id}/edit(id=${book.getBookId()})}">
     <input type="submit" value="Edit book"/>
 </form>
-<form th:method="DELETE" th:action="@{/books/{id}/delete(id=${book.getBookId()})}">
+<form th:method="DELETE" th:action="@{/books/{id}/delete(id=${book.getBookId()})}" style="margin-top: 10px">
   <input type="submit" value="Delete book"/>
 </form>
 
